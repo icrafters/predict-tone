@@ -14,22 +14,30 @@ module.exports = {
     index: function(req, res) {
 
         getTrainingData();
-        var predicttone = new models.Predicttone();
+        var preference = new models.Preference();
 
-        predicttone.role = req.body["role"];
- 		predicttone.ivy =req.body["ivy"];
-		predicttone.wr_style=req.body["wr_style"];
-		predicttone.industry=req.body["industry"];
-		predicttone.risklevel=req.body["risklevel"];
-		predicttone.sentto=req.body["sentto"];
+        preference.role = req.body["role"];
+ 		preference.ivy = req.body["ivy"];
+		preference.wr_style = req.body["wr_style"];
+		preference.industry = req.body["industry"];
+		preference.risklevel = req.body["risklevel"];
+		preference.sentto = req.body["sentto"];
 
-        var tone = this.predictTone (predicttone,training_data);
-        predicttone["tone"] = tone;
-        predicttone.save(function(err, preference) {
+        var tone = this.predictTone (preference,training_data);
+        preference["tone"] = tone;
+        preference.save(function(err, preference) {
             if (err) {
                 res.json({error: 'Error adding preference.'});
             } else {
             	console.log("saved preferences; add tone_string and return in response")
+                var predicttone = new models.Predicttone();
+                predicttone.role =  preference.role;
+                predicttone.ivy = preference.ivy;
+                predicttone.wr_style = preference.wr_style ;
+                predicttone.industry = preference.industry;
+                predicttone.risklevel = preference.risklevel;
+                predicttone.sento = preference.sentto;
+                predicttone.tone = preference["tone"];
             	switch (predicttone["tone"]){
             		case "1":
             			predicttone["tone_string"]="Mellow";

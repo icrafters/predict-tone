@@ -23,7 +23,7 @@ module.exports = Controller = Marionette.Controller.extend({
         App.core.vent.trigger('app:log', 'Controller: "Predict Tone" route hit.');
         //var view = window.App.views.contactsView;
         //window.App.views.predictToneView = new PredictToneView({model: window.App.data.predictTone});
-        //App.data.predictTone =;
+        //window.App.data.predictTone = predicttone;
         var view = new PredictToneView({model: window.App.data.predictTone});
         
         this.renderView(view);

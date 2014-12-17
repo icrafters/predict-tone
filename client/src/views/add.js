@@ -17,9 +17,22 @@ module.exports = AddView = Marionette.ItemView.extend({
             sentto: this.$el.find('input[name=sentto]:checked').val(),
         };
 
-        window.App.data.preferences.create(newPreference);
+        window.App.data.preferences.create(newPreference, {
+		    wait : true, 
+		    success : function(resp){
+		    	console.log('success callback');
+		    	console.log(resp);
+		    	//jQuery.parseJSON(xhr.responseText)
+		    	window.App.data.predictTone = resp;
+		    	window.App.controller.predicttone();
+		    },error : function(err) {
+		    	console.log('error callback');
+		    	alert('There was an error. See console for details');
+		    	console.log(err);
+		    }
+		});
         
         window.App.core.vent.trigger('app:log', 'Add View: Saved new Preference`!');
-        window.App.controller.predicttone();
+        //	window.App.controller.predicttone();
     }
 });

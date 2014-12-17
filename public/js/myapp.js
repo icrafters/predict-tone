@@ -15240,7 +15240,7 @@ module.exports = Controller = Marionette.Controller.extend({
         App.core.vent.trigger('app:log', 'Controller: "Predict Tone" route hit.');
         //var view = window.App.views.contactsView;
         //window.App.views.predictToneView = new PredictToneView({model: window.App.data.predictTone});
-        //App.data.predictTone =;
+        //window.App.data.predictTone = predicttone;
         var view = new PredictToneView({model: window.App.data.predictTone});
         
         this.renderView(view);
@@ -15323,10 +15323,23 @@ module.exports = AddView = Marionette.ItemView.extend({
             sentto: this.$el.find('input[name=sentto]:checked').val(),
         };
 
-        window.App.data.preferences.create(newPreference);
+        window.App.data.preferences.create(newPreference, {
+		    wait : true, 
+		    success : function(resp){
+		    	console.log('success callback');
+		    	console.log(resp);
+		    	//jQuery.parseJSON(xhr.responseText)
+		    	window.App.data.predictTone = resp;
+		    	window.App.controller.predicttone();
+		    },error : function(err) {
+		    	console.log('error callback');
+		    	alert('There was an error. See console for details');
+		    	console.log(err);
+		    }
+		});
         
         window.App.core.vent.trigger('app:log', 'Add View: Saved new Preference`!');
-        window.App.controller.predicttone();
+        //	window.App.controller.predicttone();
     }
 });
 
@@ -15429,35 +15442,39 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<div class=\"contact_full\">\r\n\r\n	Based on your preferences, we predict your communication tone to be \"<b>";
+  buffer += "<div class=\"contact_full\">\r\n	<div style=\"float:left; width:48%;>\r\n		Based on your preferences, we predict your communication tone to be <b>\"";
   if (stack1 = helpers.tone_string) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.tone_string; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</b>\";\r\n	Here is what we know of you:\r\n	<table>\r\n		<tr>\r\n			<td>Role: </td><td>";
+    + "\"</b>;\r\n		Here is what we know of you:\r\n		<table>\r\n			<tr>\r\n				<td>Role: </td><td>";
   if (stack1 = helpers.role) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.role; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</td>\r\n		</tr>\r\n		<tr>\r\n			<td>Industry: </td><td>";
+    + "</td>\r\n			</tr>\r\n			<tr>\r\n				<td>Industry: </td><td>";
   if (stack1 = helpers.industry) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.industry; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</td>\r\n		</tr>\r\n		<tr>\r\n			<td>Ivy?: </td><td>";
+    + "</td>\r\n			</tr>\r\n			<tr>\r\n				<td>Ivy? </td><td>";
   if (stack1 = helpers.ivy) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.ivy; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</td>\r\n		</tr>\r\n		<tr>\r\n			<td>Sent to: </td><td>";
+    + "</td>\r\n			</tr>\r\n			<tr>\r\n				<td>Sent to: </td><td>";
   if (stack1 = helpers.sentto) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.sentto; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</td>\r\n		</tr>\r\n		<tr>\r\n			<td>Writing Style: </td><td>";
+    + "</td>\r\n			</tr>\r\n			<tr>\r\n				<td>Writing Style: </td><td>";
   if (stack1 = helpers.wr_style) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.wr_style; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</td>\r\n		</tr>\r\n		<tr>\r\n			<td>Risk level: </td><td>";
+    + "</td>\r\n			</tr>\r\n			<tr>\r\n				<td>Risk level: </td><td>";
   if (stack1 = helpers.risklevel) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.risklevel; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</td>\r\n		</tr>\r\n	</table>\r\n\r\n	Here is a sample of communication from you:\r\n\r\n	<div class=\"tone_3\">\r\n		Tone 3\r\n	</div>\r\n\r\n	<div class=\"tone_2\">\r\n		Tone 2\r\n	</div>\r\n\r\n	<div class=\"tone_1\">\r\n		Tone 1\r\n	</div>\r\n<a href=\"/\"><< Back</a> \r\n</div>\r\n\r\n\r\n";
+    + "</td>\r\n			</tr>\r\n		</table>\r\n	</div>\r\n	<div style=\"float:right;\">\r\n		Here is a sample of communication from you:\r\n\r\n		<div class=\"tone_3\" style=\"display:none;\">\r\n			Tone 3\r\n		</div>\r\n\r\n		<div class=\"tone_2\" style=\"display:none;\">\r\n			Tone 2\r\n		</div>\r\n\r\n		<div class=\"tone_1\" style=\"display:none;\">\r\n			Tone 1\r\n		</div>\r\n	</div>\r\n<div style=\"clear:both;\">\r\n<a href=\"/\"><< Back</a> \r\n</div>\r\n</div>\r\n<script type=\"text/javascript\">\r\n	$(\".tone_\"+";
+  if (stack1 = helpers.tone) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.tone; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + ").show();\r\n</script>\r\n\r\n\r\n\r\n";
   return buffer;
   });
 

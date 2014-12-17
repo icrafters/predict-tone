@@ -1,42 +1,50 @@
 <div class="contact_full">
-
-	Based on your preferences, we predict your communication tone to be "<b>{{tone_string}}</b>";
-	Here is what we know of you:
-	<table>
-		<tr>
-			<td>Role: </td><td>{{role}}</td>
-		</tr>
-		<tr>
-			<td>Industry: </td><td>{{industry}}</td>
-		</tr>
-		<tr>
-			<td>Ivy?: </td><td>{{ivy}}</td>
-		</tr>
-		<tr>
-			<td>Sent to: </td><td>{{sentto}}</td>
-		</tr>
-		<tr>
-			<td>Writing Style: </td><td>{{wr_style}}</td>
-		</tr>
-		<tr>
-			<td>Risk level: </td><td>{{risklevel}}</td>
-		</tr>
-	</table>
-
-	Here is a sample of communication from you:
-
-	<div class="tone_3">
-		Tone 3
+	<div style="float:left; width:48%;>
+		Based on your preferences, we predict your communication tone to be <b>"{{tone_string}}"</b>;
+		Here is what we know of you:
+		<table>
+			<tr>
+				<td>Role: </td><td>{{role}}</td>
+			</tr>
+			<tr>
+				<td>Industry: </td><td>{{industry}}</td>
+			</tr>
+			<tr>
+				<td>Ivy? </td><td>{{ivy}}</td>
+			</tr>
+			<tr>
+				<td>Sent to: </td><td>{{sentto}}</td>
+			</tr>
+			<tr>
+				<td>Writing Style: </td><td>{{wr_style}}</td>
+			</tr>
+			<tr>
+				<td>Risk level: </td><td>{{risklevel}}</td>
+			</tr>
+		</table>
 	</div>
+	<div style="float:right;">
+		Here is a sample of communication from you:
 
-	<div class="tone_2">
-		Tone 2
-	</div>
+		<div class="tone_3" style="display:none;">
+			Tone 3
+		</div>
 
-	<div class="tone_1">
-		Tone 1
+		<div class="tone_2" style="display:none;">
+			Tone 2
+		</div>
+
+		<div class="tone_1" style="display:none;">
+			Tone 1
+		</div>
 	</div>
+<div style="clear:both;">
 <a href="/"><< Back</a> 
 </div>
+</div>
+<script type="text/javascript">
+	$(".tone_"+{{tone}}).show();
+</script>
+
 
 
