@@ -1,8 +1,22 @@
-<table>
+<script type="text/Javascript">
+	$(document).ready(function() 
+	    { 
+	        $("#myTable").tablesorter( {sortList: [[6,0]]} ); 
+	    } 
+	); 
+	    	    
+</script>
+<div style="clear:right;padding-bottom:5px;">
+	<h1>Training Data</h1>
+	Test Data for Intuitive Crafters. <a href="#add">Predict the Tone</a>
+</div>
+<table id="myTable" class="tablesorter">
+	<thead>
 	<tr>
-		<th>Role</th><th>Ivy</th><th>Writing Style</th><th>Industry</th><th>Risk Level</th><th>Sent to</th><th>Tone</th>
+		<th class="header">Role</th><th class="header">Ivy</th><th class="header">Writing Style</th><th class="header">Industry</th><th class="header">Risk Level</th><th class="header">Sent to</th><th class="header">Tone</th>
 	</tr>
-
+	</thead>
+	<tbody>
 	{{#each .}}
 
 	<tr>
@@ -15,4 +29,6 @@
 		<td>{{tone}}</td>
 	</tr>
 	{{/each}}
+	</tbody>
 </table>
+

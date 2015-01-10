@@ -1,3 +1,32 @@
+<style>
+.mood {display:inline-block;}
+.serious{
+	background: #ffffff url("http://emojipedia.org/wp-content/uploads/2014/04/128x128x1f620-google-android.png.pagespeed.ic.P1zzk2awCb.png") no-repeat left top;
+	width:50px;height:50px;
+	background-size: 50px 50px;	
+  }
+.happy
+{
+	background: #ffffff url("http://emojipedia.org/wp-content/uploads/2014/04/128x128x1f603-google-android.png.pagespeed.ic.9fRw1Zis8-.png") no-repeat left top;
+	width:50px;height:50px;
+	background-size: 50px 50px;	
+}
+
+.pensive
+{
+	background: #ffffff url("http://emojipedia.org/wp-content/uploads/2014/04/128x128x1f614-google-android.png.pagespeed.ic.IJ5RjUFy0u.png") no-repeat left top;
+	width:50px;height:50px;
+	background-size: 50px 50px;
+}
+.ok
+{
+
+	background: #ffffff url("http://emojipedia.org/wp-content/uploads/2014/04/128x128x1f646-google-android.png.pagespeed.ic.NwV3YRJM0b.png") no-repeat left top;
+	width:50px;height:50px;
+	background-size: 50px 50px;
+	
+}
+</style>
 <div class="add_preference" style="padding-bottom:20px;">
     <label for="role">Role:</label> 
     <input type="radio" id="role" name="role" value="c_level" checked/> C-Level &nbsp;
@@ -33,6 +62,15 @@
 	    <input type="radio" id="sentto" name="sentto" value="peer" /> Peers &nbsp;
 	    <input type="radio" id="sentto" name="sentto" value="higher" /> Higher ups &nbsp;
     <br/><br/>
+
+    Terms or phrases: <input type="text" id="terms1" name="terms" size="25px" max-length="50" /> <input type="text" id="terms2" name="terms" size="25px" max-length="50" /> <input type="text" id="terms3" name="terms" size="25px" max-length="50" />
+    <br/>
+    <br/>
+    Pick an emoji: <input type="radio" id="mood_serious" name="mood" value="serious" checked /> <div class="mood serious"> &nbsp;</div>
+    <input type="radio" id="mood_ok" name="mood" value="ok"  /> <div class="mood ok"> &nbsp;</div>
+    <input type="radio" id="mood_happy" name="mood" value="happy" /> <div class="mood happy"> &nbsp;</div>
+    <br/>
+    <br/>
     <a href="/"><< Back</a> | <a href="#" class="save-button">Predict Tone</a>
 
 </div>

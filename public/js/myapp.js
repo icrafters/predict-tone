@@ -15470,11 +15470,11 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   if (stack1 = helpers.risklevel) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.risklevel; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</td>\r\n			</tr>\r\n		</table>\r\n	</div>\r\n	<div style=\"float:right;\">\r\n		Here is a sample of communication from you:\r\n\r\n		<div class=\"tone_3\" style=\"display:none;\">\r\n			Tone 3\r\n		</div>\r\n\r\n		<div class=\"tone_2\" style=\"display:none;\">\r\n			Tone 2\r\n		</div>\r\n\r\n		<div class=\"tone_1\" style=\"display:none;\">\r\n			Tone 1\r\n		</div>\r\n	</div>\r\n<div style=\"clear:both;\">\r\n<a href=\"/\"><< Back</a> \r\n</div>\r\n</div>\r\n<script type=\"text/javascript\">\r\n	$(\".tone_\"+";
+    + "</td>\r\n			</tr>\r\n		</table>\r\n	</div>\r\n	<div style=\"float:right;\">\r\n		Here is a sample of communication from you:\r\n\r\n		<div class=\"tone_3\" style=\"display:none;\">\r\n			Tone 3\r\n		</div>\r\n\r\n		<div class=\"tone_2\" style=\"display:none;\">\r\n			Tone 2\r\n		</div>\r\n\r\n		<div class=\"tone_1\" style=\"display:none;\">\r\n			Tone 1\r\n		</div>\r\n	</div>\r\n<div style=\"clear:both;\">\r\n<a href=\"/\"><< Back</a> \r\n</div>\r\n</div>\r\n<script type=\"text/javascript\">\r\n\r\n	$(\".tone_\"+";
   if (stack1 = helpers.tone) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.tone; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + ").show();\r\n</script>\r\n\r\n\r\n\r\n";
+    + ").show();\r\n\r\n</script>\r\n\r\n\r\n\r\n";
   return buffer;
   });
 
@@ -15521,10 +15521,10 @@ function program1(depth0,data) {
   return buffer;
   }
 
-  buffer += "<table>\r\n	<tr>\r\n		<th>Role</th><th>Ivy</th><th>Writing Style</th><th>Industry</th><th>Risk Level</th><th>Sent to</th><th>Tone</th>\r\n	</tr>\r\n\r\n	";
+  buffer += "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.18.4/js/jquery.tablesorter.min.js\"/>\r\n<table id=\"myTable\" class=\"tablesorter\">\r\n	<tr>\r\n		<th>Role</th><th>Ivy</th><th>Writing Style</th><th>Industry</th><th>Risk Level</th><th>Sent to</th><th>Tone</th>\r\n	</tr>\r\n\r\n	";
   stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n</table>";
+  buffer += "\r\n</table>\r\n\r\n<script type=\"text/Javascript\">\r\n	$(document).ready(function() \r\n	    { \r\n	    	alert('my name is');\r\n	        $(\"#myTable\").tablesorter( {sortList: [[0,0], [1,0]]} ); \r\n	    } \r\n	); \r\n	    \r\n	    \r\n</script>";
   return buffer;
   });
 

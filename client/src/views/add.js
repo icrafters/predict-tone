@@ -15,6 +15,8 @@ module.exports = AddView = Marionette.ItemView.extend({
             industry: this.$el.find('#industry').val(),
             risklevel: this.$el.find('[id=risklevel]').find(':selected').val(),
             sentto: this.$el.find('input[name=sentto]:checked').val(),
+            mood: this.$el.find('input[name=mood]:checked').val(),
+            terms: this.$el.find('#terms1').val()+"|"+ this.$el.find('#terms3').val()+"|"+ this.$el.find('#terms3').val()
         };
 
         window.App.data.preferences.create(newPreference, {

@@ -43,7 +43,7 @@ module.exports = {
             			predicttone["tone_string"]="Mellow";
             			break;
             		case "2":
-            			predicttone["tone_string"]="cordial";
+            			predicttone["tone_string"]="Cordial";
             			break;
             		case "3":
             			predicttone["tone_string"] ="Strong";

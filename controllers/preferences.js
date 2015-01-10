@@ -29,7 +29,7 @@ getData =  function (){
 	//   }
 	//   else {
 	  	var query = models.Preference.find({});
-	  	query.sort({tone:-1, risklevel:-1});
+	  	query.sort({tone:-1, risklevel:1});
 	  	query.exec(function(err, data) {
            training_data = test_data =  data;
            //myCache.set("training_data", training_data);
