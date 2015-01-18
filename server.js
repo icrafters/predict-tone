@@ -33,14 +33,14 @@ if ('development' == app.get('env')) {
 }
 
 //connect to the db server:
-mongoose.connect('mongodb://localhost/IntuitiveCrafters/preferences');
-mongoose.connection.on('open', function() {
-   console.log("Connected to Mongoose...");
+//mongoose.connect('mongodb://localhost/IntuitiveCrafters/preferences');
+//mongoose.connection.on('open', function() {
+//   console.log("Connected to Mongoose...");
 
   //  check if the db is empty, if so seed it with some contacts:
 //seeder.check();
-seeder.checkAdd();
-});
+//seeder.checkAdd();
+//});
 
 //routes list:
 routes.initialize(app);

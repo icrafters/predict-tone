@@ -1,7 +1,8 @@
 var models = require('../app/models'),
     md5 = require('MD5'),
     //NodeCache =  require('node-cache'),
-	DecisionTree = require('decision-tree');
+	DecisionTree = require('decision-tree'),
+    fs =  require("fs");
 
 var training_data,
 	test_data = {},
@@ -25,35 +26,36 @@ module.exports = {
 
         var tone = this.predictTone (preference,training_data);
         preference["tone"] = tone;
-        preference.save(function(err, preference) {
+       /* preference.save(function(err, preference) {
             if (err) {
-                res.json({error: 'Error adding preference.'});
+                console.log("Error adding preference.")
+                //res.json({error: 'Error adding preference.'});
             } else {
             	console.log("saved preferences; add tone_string and return in response")
-                var predicttone = new models.Predicttone();
-                predicttone.role =  preference.role;
-                predicttone.ivy = preference.ivy;
-                predicttone.wr_style = preference.wr_style ;
-                predicttone.industry = preference.industry;
-                predicttone.risklevel = preference.risklevel;
-                predicttone.sento = preference.sentto;
-                predicttone.tone = preference["tone"];
-            	switch (predicttone["tone"]){
-            		case "1":
-            			predicttone["tone_string"]="Mellow";
-            			break;
-            		case "2":
-            			predicttone["tone_string"]="Cordial";
-            			break;
-            		case "3":
-            			predicttone["tone_string"] ="Strong";
-            			break;
-
-            	}
-            	res.json(predicttone);
-            	
             }
-        });
+            
+        });*/
+        var predicttone = new models.Predicttone();
+                        predicttone.role =  preference.role;
+                        predicttone.ivy = preference.ivy;
+                        predicttone.wr_style = preference.wr_style ;
+                        predicttone.industry = preference.industry;
+                        predicttone.risklevel = preference.risklevel;
+                        predicttone.sento = preference.sentto;
+                        predicttone.tone = preference["tone"];
+                        switch (predicttone["tone"]){
+                            case "1":
+                                predicttone["tone_string"]="Mellow";
+                                break;
+                            case "2":
+                                predicttone["tone_string"]="Cordial";
+                                break;
+                            case "3":
+                                predicttone["tone_string"] ="Strong";
+                                break;
+
+                        }
+                        res.json(predicttone);
     },
 
 };
@@ -89,29 +91,22 @@ predictTone = function (predicttone, training_data){
 };
 
 getTrainingData =  function (){
-    // myCache = new NodeCache( { stdTTL: 1000, checkperiod: 120 } );
-    // console.log(myCache.getStats());
-    // myCache.get("training_data", function( err, value ){
-    //   if( !err && Object.keys(value).length>0) {
-    //     console.log( value );
-    //     training_data=value;
-      
-    //   }
-    //   else {
-        var query = models.Preference.find({});
+
+        /*var query = models.Preference.find({});
         query.sort({tone:-1, risklevel:-1});
         query.exec(function(err, data) {
            training_data = test_data =  data;
-           //myCache.set("training_data", training_data);
                
-        });
-        /*models.Preference.find({}, function(err, data) {
-           training_data = test_data =  data;
-           myCache.set("training_data", training_data);
-               
-        });
-*/
-      //}
-    //});
+        });*/
         
+        fs.readFile('app/data.js', 'utf8', function (err, data) {
+          if (err) throw err;
+          training_data = test_data = JSON.parse(data);
+        });
+        
+};
+
+setEmailMessage  =  function (predicttone, req){
+    
+    
 };
