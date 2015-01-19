@@ -1,0 +1,154 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\software\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\software\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   '-g',
+1 verbose cli   'bower' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 verbose node symlink C:\software\nodejs\\node.exe
+5 verbose cache add [ 'bower', null ]
+6 verbose cache add name=undefined spec="bower" args=["bower",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: 'bower',
+7 verbose parsed url   path: 'bower',
+7 verbose parsed url   href: 'bower' }
+8 silly lockFile 206e3ce5-bower bower
+9 verbose lock bower C:\Users\mylavaraps\AppData\Roaming\npm-cache\206e3ce5-bower.lock
+10 silly lockFile 206e3ce5-bower bower
+11 silly lockFile 206e3ce5-bower bower
+12 verbose addNamed [ 'bower', '' ]
+13 verbose addNamed [ null, '*' ]
+14 silly lockFile 1240aab1-bower bower@
+15 verbose lock bower@ C:\Users\mylavaraps\AppData\Roaming\npm-cache\1240aab1-bower.lock
+16 silly addNameRange { name: 'bower', range: '*', hasData: false }
+17 verbose request where is /bower
+18 verbose request registry http://registry.npm.wsjfdev.dowjones.net/
+19 verbose request id 30baaaf6eb802a91
+20 verbose url raw /bower
+21 verbose url resolving [ 'http://registry.npm.wsjfdev.dowjones.net/', './bower' ]
+22 verbose url resolved http://registry.npm.wsjfdev.dowjones.net/bower
+23 verbose request where is http://registry.npm.wsjfdev.dowjones.net/bower
+24 info trying registry request attempt 1 at 19:56:06
+25 verbose etag "2C9MHUMYQWJZ6OPY4SUPHKHB5"
+26 http GET http://registry.npm.wsjfdev.dowjones.net/bower
+27 http 200 http://registry.npm.wsjfdev.dowjones.net/bower
+28 verbose bad json <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head><meta http-equiv="refresh" content="0;url=http://searchassist.verizon.com/main?InterceptSource=0&ClientLocation=us&ParticipantID=euekiz39ksg8nwp7iqj2fp5wzfwi5q76&FailureMode=1&SearchQuery=&FailedURI=http%3A%2F%2Fregistry.npm.wsjfdev.dowjones.net%2Fbower&AddInType=4&Version=2.1.8-1.90base&Referer=install+bower&Implementation=0&method=GET"/><script type="text/javascript">url="http://searchassist.verizon.com/main?InterceptSource=0&ClientLocation=us&ParticipantID=euekiz39ksg8nwp7iqj2fp5wzfwi5q76&FailureMode=1&SearchQuery=&FailedURI=http%3A%2F%2Fregistry.npm.wsjfdev.dowjones.net%2Fbower&AddInType=4&Version=2.1.8-1.90base&Referer=install+bower&Implementation=0&method=GET";if(top.location!=location){var w=window,d=document,e=d.documentElement,b=d.body,x=w.innerWidth||e.clientWidth||b.clientWidth,y=w.innerHeight||e.clientHeight||b.clientHeight;url+="&w="+x+"&h="+y;}window.location.replace(url);</script></head><body></body></html>
+29 error registry error parsing json
+30 verbose headers { server: 'nginx/1.0.15',
+30 verbose headers   date: 'Fri, 26 Dec 2014 00:56:06 GMT',
+30 verbose headers   'content-type': 'text/html; charset=UTF-8',
+30 verbose headers   'transfer-encoding': 'chunked',
+30 verbose headers   connection: 'close',
+30 verbose headers   'cache-control': 'no-cache, no-store',
+30 verbose headers   expires: 'Thu, 01 Jan 1970 00:00:00 GMT',
+30 verbose headers   pragma: 'no-cache' }
+31 silly registry.get cb [ 304, undefined ]
+32 verbose etag http://registry.npm.wsjfdev.dowjones.net/bower from cache
+33 silly addNameRange number 2 { name: 'bower', range: '*', hasData: true }
+34 silly addNameRange versions [ 'bower',
+34 silly addNameRange   [ '0.1.0',
+34 silly addNameRange     '0.1.2',
+34 silly addNameRange     '0.1.3',
+34 silly addNameRange     '0.2.0',
+34 silly addNameRange     '0.3.0',
+34 silly addNameRange     '0.3.1',
+34 silly addNameRange     '0.3.2',
+34 silly addNameRange     '0.4.0',
+34 silly addNameRange     '0.5.0',
+34 silly addNameRange     '0.5.1',
+34 silly addNameRange     '0.6.0',
+34 silly addNameRange     '0.6.1',
+34 silly addNameRange     '0.6.2',
+34 silly addNameRange     '0.6.3',
+34 silly addNameRange     '0.6.4',
+34 silly addNameRange     '0.6.5',
+34 silly addNameRange     '0.6.6',
+34 silly addNameRange     '0.6.7',
+34 silly addNameRange     '0.6.8',
+34 silly addNameRange     '0.7.0',
+34 silly addNameRange     '0.7.1',
+34 silly addNameRange     '0.8.0',
+34 silly addNameRange     '0.8.1',
+34 silly addNameRange     '0.8.2',
+34 silly addNameRange     '0.8.3',
+34 silly addNameRange     '0.8.4',
+34 silly addNameRange     '0.8.5',
+34 silly addNameRange     '0.8.6',
+34 silly addNameRange     '0.9.0',
+34 silly addNameRange     '0.9.1',
+34 silly addNameRange     '0.9.2',
+34 silly addNameRange     '0.10.0',
+34 silly addNameRange     '1.0.0',
+34 silly addNameRange     '1.0.1',
+34 silly addNameRange     '1.0.2',
+34 silly addNameRange     '1.0.3',
+34 silly addNameRange     '1.1.0',
+34 silly addNameRange     '1.1.1',
+34 silly addNameRange     '1.1.2',
+34 silly addNameRange     '1.2.0',
+34 silly addNameRange     '1.2.1',
+34 silly addNameRange     '1.2.2',
+34 silly addNameRange     '1.2.3',
+34 silly addNameRange     '1.2.4',
+34 silly addNameRange     '1.2.5',
+34 silly addNameRange     '1.2.6',
+34 silly addNameRange     '1.2.7',
+34 silly addNameRange     '1.2.8',
+34 silly addNameRange     '1.3.0',
+34 silly addNameRange     '1.3.1',
+34 silly addNameRange     '1.3.2',
+34 silly addNameRange     '1.3.3',
+34 silly addNameRange     '1.3.4',
+34 silly addNameRange     '1.3.5',
+34 silly addNameRange     '1.3.6',
+34 silly addNameRange     '1.3.7',
+34 silly addNameRange     '1.3.8',
+34 silly addNameRange     '1.3.9',
+34 silly addNameRange     '1.3.10',
+34 silly addNameRange     '1.3.11',
+34 silly addNameRange     '1.3.12' ] ]
+35 verbose addNamed [ 'bower', '1.3.12' ]
+36 verbose addNamed [ '1.3.12', '1.3.12' ]
+37 silly lockFile 9819431c-bower-1-3-12 bower@1.3.12
+38 verbose lock bower@1.3.12 C:\Users\mylavaraps\AppData\Roaming\npm-cache\9819431c-bower-1-3-12.lock
+39 silly lockFile 08456602-jones-net-bower-bower-1-3-12-tgz http://registry.npm.wsjfdev.dowjones.net/bower/-/bower-1.3.12.tgz
+40 verbose lock http://registry.npm.wsjfdev.dowjones.net/bower/-/bower-1.3.12.tgz C:\Users\mylavaraps\AppData\Roaming\npm-cache\08456602-jones-net-bower-bower-1-3-12-tgz.lock
+41 verbose addRemoteTarball [ 'http://registry.npm.wsjfdev.dowjones.net/bower/-/bower-1.3.12.tgz',
+41 verbose addRemoteTarball   '37de0edb3904baf90aee13384a1a379a05ee214c' ]
+42 info retry fetch attempt 1 at 19:56:07
+43 verbose fetch to= C:\Users\MYLAVA~1\AppData\Local\Temp\npm-8956-pzo1k_VE\registry.npm.wsjfdev.dowjones.net\bower\-\bower-1.3.12.tgz
+44 http GET http://registry.npm.wsjfdev.dowjones.net/bower/-/bower-1.3.12.tgz
+45 http 200 http://registry.npm.wsjfdev.dowjones.net/bower/-/bower-1.3.12.tgz
+46 silly lockFile 08456602-jones-net-bower-bower-1-3-12-tgz http://registry.npm.wsjfdev.dowjones.net/bower/-/bower-1.3.12.tgz
+47 silly lockFile 08456602-jones-net-bower-bower-1-3-12-tgz http://registry.npm.wsjfdev.dowjones.net/bower/-/bower-1.3.12.tgz
+48 silly lockFile 9819431c-bower-1-3-12 bower@1.3.12
+49 silly lockFile 9819431c-bower-1-3-12 bower@1.3.12
+50 silly lockFile 1240aab1-bower bower@
+51 silly lockFile 1240aab1-bower bower@
+52 error Error: shasum check failed for C:\Users\MYLAVA~1\AppData\Local\Temp\npm-8956-pzo1k_VE\registry.npm.wsjfdev.dowjones.net\bower\-\bower-1.3.12.tgz
+52 error Expected: 37de0edb3904baf90aee13384a1a379a05ee214c
+52 error Actual:   2dab01dc104d9ab7516fa3d61124ac22353f1f0e
+52 error From:     http://registry.npm.wsjfdev.dowjones.net/bower/-/bower-1.3.12.tgz
+52 error     at C:\software\nodejs\node_modules\npm\node_modules\sha\index.js:38:8
+52 error     at ReadStream.<anonymous> (C:\software\nodejs\node_modules\npm\node_modules\sha\index.js:85:7)
+52 error     at ReadStream.emit (events.js:117:20)
+52 error     at _stream_readable.js:943:16
+52 error     at process._tickCallback (node.js:419:13)
+53 error If you need help, you may report this *entire* log,
+53 error including the npm and node versions, at:
+53 error     <http://github.com/npm/npm/issues>
+54 error System Windows_NT 6.1.7601
+55 error command "C:\\software\\nodejs\\\\node.exe" "C:\\software\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "-g" "bower"
+56 error cwd C:\temp\projects\predict-tone
+57 error node -v v0.10.33
+58 error npm -v 1.4.28
+59 verbose exit [ 1, true ]
