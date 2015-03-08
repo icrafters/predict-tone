@@ -13,7 +13,16 @@ var Preference  =  new Schema ({
         tone:{type:  String}
 });
 
-
+var Predicteq  =  new Schema ({
+        eq1:{type: String}, 
+        eq2:{type:  String},
+        eq3:{type:  String},
+        eq4:{type:  String},
+        eq5:{type:  String},
+        eq6:{type:  String},
+        eq7:{type:  String},
+        equotient:{type:  String}
+});
 
 var Predicttone = new Schema({
         role:{type: String}, 
@@ -29,5 +38,6 @@ var Predicttone = new Schema({
 
 module.exports = {
     Preference: mongoose.model('Preference', Preference),
-    Predicttone: mongoose.model('Predicttone', Predicttone)
+    Predicttone: mongoose.model('Predicttone', Predicttone),
+    Predicteq: mongoose.model('Predicteq', Predicteq)
 };

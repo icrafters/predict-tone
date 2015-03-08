@@ -11,14 +11,5 @@ module.exports = PredictTone = Marionette.ItemView.extend({
         e.preventDefault();
         window.App.controller.home();
     },
-    deleteContact: function(e) {
-        e.preventDefault();
-        console.log('Deleting contact');
-        window.App.data.contacts.remove(this.model);
-
-        // this will actually send a DELETE to the server:
-        this.model.destroy();
-
-        window.App.controller.home();
-    }
+   
 });

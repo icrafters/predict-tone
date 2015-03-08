@@ -1,8 +1,8 @@
 var Marionette = require('backbone.marionette'),
-    ContactsView = require('./views/contacts'),
     PredictToneView = require('./views/predict_tone'),
     AddPreferenceView = require('./views/add'),
-    PreferencesView = require('./views/preferences_list');
+    PreferencesView = require('./views/preferences_list'),
+    FindEQView = require('./views/findeq');
 
 module.exports = Controller = Marionette.Controller.extend({
     initialize: function() {
@@ -30,10 +30,27 @@ module.exports = Controller = Marionette.Controller.extend({
         //window.App.router.navigate('#add');
     },
 
+    predicteq: function() {
+        App.core.vent.trigger('app:log', 'Controller: "Predict EQ" route hit.');
+        //var view = window.App.views.contactsView;
+        //window.App.views.predictToneView = new PredictToneView({model: window.App.data.predictTone});
+        //window.App.data.predictTone = predicttone;
+        var view = new AddPreferenceView();
+        
+        this.renderView(view);
+        //window.App.router.navigate('#add');
+    },
 
     add: function() {
         App.core.vent.trigger('app:log', 'Controller: "AddPreferenceView" route hit.');
         var view = new AddPreferenceView();
+        this.renderView(view);
+        window.App.router.navigate('/');
+    },
+
+    findeq: function() {
+        App.core.vent.trigger('app:log', 'Controller: "FindEQView" route hit.');
+        var view = new FindEQView();
         this.renderView(view);
         window.App.router.navigate('/');
     },

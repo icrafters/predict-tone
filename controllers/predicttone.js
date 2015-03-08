@@ -1,7 +1,6 @@
 var models = require('../app/models'),
     md5 = require('MD5'),
-    //NodeCache =  require('node-cache'),
-	DecisionTree = require('decision-tree'),
+    DecisionTree = require('decision-tree'),
     fs =  require("fs");
 
 var training_data,
@@ -13,10 +12,10 @@ var training_data,
 module.exports = {
 
     index: function(req, res) {
-
         getTrainingData();
-        var preference = new models.Preference();
 
+        var preference = new models.Preference();
+    
         preference.role = req.body["role"];
  		preference.ivy = req.body["ivy"];
 		preference.wr_style = req.body["wr_style"];
@@ -24,38 +23,32 @@ module.exports = {
 		preference.risklevel = req.body["risklevel"];
 		preference.sentto = req.body["sentto"];
 
+       
         var tone = this.predictTone (preference,training_data);
+        
         preference["tone"] = tone;
-       /* preference.save(function(err, preference) {
-            if (err) {
-                console.log("Error adding preference.")
-                //res.json({error: 'Error adding preference.'});
-            } else {
-            	console.log("saved preferences; add tone_string and return in response")
-            }
-            
-        });*/
+       
         var predicttone = new models.Predicttone();
-                        predicttone.role =  preference.role;
-                        predicttone.ivy = preference.ivy;
-                        predicttone.wr_style = preference.wr_style ;
-                        predicttone.industry = preference.industry;
-                        predicttone.risklevel = preference.risklevel;
-                        predicttone.sento = preference.sentto;
-                        predicttone.tone = preference["tone"];
-                        switch (predicttone["tone"]){
-                            case "1":
-                                predicttone["tone_string"]="Mellow";
-                                break;
-                            case "2":
-                                predicttone["tone_string"]="Cordial";
-                                break;
-                            case "3":
-                                predicttone["tone_string"] ="Strong";
-                                break;
+        predicttone.role =  preference.role;
+        predicttone.ivy = preference.ivy;
+        predicttone.wr_style = preference.wr_style ;
+        predicttone.industry = preference.industry;
+        predicttone.risklevel = preference.risklevel;
+        predicttone.sento = preference.sentto;
+        predicttone.tone = preference["tone"];
+        switch (predicttone["tone"]){
+            case "1":
+                predicttone["tone_string"]="Mellow";
+                break;
+            case "2":
+                predicttone["tone_string"]="Cordial";
+                break;
+            case "3":
+                predicttone["tone_string"] ="Strong";
+                break;
 
-                        }
-                        res.json(predicttone);
+        }
+        res.json(predicttone);
     },
 
 };
@@ -90,20 +83,15 @@ predictTone = function (predicttone, training_data){
      	return predicted_class;
 };
 
-getTrainingData =  function (){
 
-        /*var query = models.Preference.find({});
-        query.sort({tone:-1, risklevel:-1});
-        query.exec(function(err, data) {
-           training_data = test_data =  data;
-               
-        });*/
-        
-        fs.readFile('app/data.js', 'utf8', function (err, data) {
-          if (err) throw err;
-          training_data = test_data = JSON.parse(data);
-        });
-        
+
+
+getTrainingData =  function (){
+    fs.readFile('app/data.js', 'utf8', function (err, data) {
+      if (err) throw err;
+      training_data = test_data = JSON.parse(data);
+    });
+
 };
 
 setEmailMessage  =  function (predicttone, req){

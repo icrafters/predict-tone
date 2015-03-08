@@ -15167,7 +15167,8 @@ var Marionette = require('backbone.marionette'),
     Router = require('./router'),
     PreferenceModel = require('./models/preference'),
     PreferencesCollection = require('./collections/preferences'),
-    PredicttoneModel = require ('./models/predicttone');
+    PredicttoneModel = require ('./models/predicttone'),
+    PredicteqModel =  require ('./models/predicteq');
 
 module.exports = App = function App() {};
 
@@ -15183,8 +15184,12 @@ App.prototype.start = function(){
         console.log('In App start');
         // load up some initial data:
         var preferences = new PreferencesCollection();
+        var predicteq = new PredicteqModel();
+        
+        App.data.predicteq =  predicteq;
         preferences.fetch({
             success: function() {
+                console.log('In App start-success');
                 App.data.preferences = preferences;
                 App.core.vent.trigger('app:start');
             }
@@ -15195,6 +15200,7 @@ App.prototype.start = function(){
     App.core.vent.bind('app:start', function(options){
         App.core.vent.trigger('app:log', 'App: Starting');
         if (Backbone.history) {
+            console.log('In App start-success');
             App.controller = new Controller();
             App.router = new Router({ controller: App.controller });
             App.core.vent.trigger('app:log', 'App: Backbone.history starting');
@@ -15212,21 +15218,23 @@ App.prototype.start = function(){
     App.core.start();
 };
 
-},{"./collections/preferences":2,"./controller":3,"./models/predicttone":5,"./models/preference":6,"./router":7}],2:[function(require,module,exports){
+},{"./collections/preferences":2,"./controller":3,"./models/predicteq":5,"./models/predicttone":6,"./models/preference":7,"./router":8}],2:[function(require,module,exports){
 var Backbone = require('backbone'),
-    PreferenceModel = require('../models/preference');
+    PreferenceModel = require('../models/preference'),
+    PredicteqModel = require('../models/predicteq');
 
 module.exports = PreferencesCollection = Backbone.Collection.extend({
     model:  PreferenceModel,
     url: '/api/preferences'
 });
 
-},{"../models/preference":6}],3:[function(require,module,exports){
+
+},{"../models/predicteq":5,"../models/preference":7}],3:[function(require,module,exports){
 var Marionette = require('backbone.marionette'),
-    ContactsView = require('./views/contacts'),
     PredictToneView = require('./views/predict_tone'),
     AddPreferenceView = require('./views/add'),
-    PreferencesView = require('./views/preferences_list');
+    PreferencesView = require('./views/preferences_list'),
+    FindEQView = require('./views/findeq');
 
 module.exports = Controller = Marionette.Controller.extend({
     initialize: function() {
@@ -15254,10 +15262,27 @@ module.exports = Controller = Marionette.Controller.extend({
         //window.App.router.navigate('#add');
     },
 
+    predicteq: function() {
+        App.core.vent.trigger('app:log', 'Controller: "Predict EQ" route hit.');
+        //var view = window.App.views.contactsView;
+        //window.App.views.predictToneView = new PredictToneView({model: window.App.data.predictTone});
+        //window.App.data.predictTone = predicttone;
+        var view = new AddPreferenceView();
+        
+        this.renderView(view);
+        //window.App.router.navigate('#add');
+    },
 
     add: function() {
         App.core.vent.trigger('app:log', 'Controller: "AddPreferenceView" route hit.');
         var view = new AddPreferenceView();
+        this.renderView(view);
+        window.App.router.navigate('/');
+    },
+
+    findeq: function() {
+        App.core.vent.trigger('app:log', 'Controller: "FindEQView" route hit.');
+        var view = new FindEQView();
         this.renderView(view);
         window.App.router.navigate('/');
     },
@@ -15278,7 +15303,7 @@ module.exports = Controller = Marionette.Controller.extend({
 });
 
 
-},{"./views/add":8,"./views/contacts":9,"./views/predict_tone":10,"./views/preferences_list":11}],4:[function(require,module,exports){
+},{"./views/add":9,"./views/findeq":10,"./views/predict_tone":11,"./views/preferences_list":12}],4:[function(require,module,exports){
 var App = require('./app');
 var myapp = new App();
 myapp.start();
@@ -15286,12 +15311,20 @@ myapp.start();
 },{"./app":1}],5:[function(require,module,exports){
 var Backbone = require('backbone');
 
+module.exports = PredicteqModel = Backbone.Model.extend({
+    idAttribute: '_id',
+    urlRoot: 'api/predicteq'
+});
+
+},{}],6:[function(require,module,exports){
+var Backbone = require('backbone');
+
 module.exports = PredicttoneModel = Backbone.Model.extend({
     idAttribute: '_id',
     urlRoot: 'api/predicttone'
 });
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 var Backbone = require('backbone');
 
 module.exports = PreferenceModel = Backbone.Model.extend({
@@ -15299,18 +15332,20 @@ module.exports = PreferenceModel = Backbone.Model.extend({
     urlRoot: 'api/preferences'
 });
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 var Marionette = require('backbone.marionette');
 
 module.exports = Router = Marionette.AppRouter.extend({
     appRoutes: {
         ''  : 'home',
         'add': 'add',
+        'findeq': 'findeq',
+        'predicteq': 'predicteq',
         'predicttone' : 'predicttone'
     }
 });
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 var Marionette = require('backbone.marionette');
 
 module.exports = AddView = Marionette.ItemView.extend({
@@ -15329,7 +15364,12 @@ module.exports = AddView = Marionette.ItemView.extend({
             risklevel: this.$el.find('[id=risklevel]').find(':selected').val(),
             sentto: this.$el.find('input[name=sentto]:checked').val(),
             mood: this.$el.find('input[name=mood]:checked').val(),
-            terms: this.$el.find('#terms1').val()+"|"+ this.$el.find('#terms3').val()+"|"+ this.$el.find('#terms3').val()
+            terms: this.$el.find('#terms1').val()+"|"+ this.$el.find('#terms3').val()+"|"+ this.$el.find('#terms3').val(),
+            author: (this.$el.find('input[name=author]:checked').length>0)?"true":"false",
+            sm_frequency_score: this.$el.find('input[name=sm_frequency_score]:checked').val(),
+            education: this.$el.find('input[name=education]:checked').val(),
+            equotient: this.$el.find('#equotient').val()
+
         };
 
         window.App.data.preferences.create(newPreference, {
@@ -15352,32 +15392,49 @@ module.exports = AddView = Marionette.ItemView.extend({
     }
 });
 
-},{"../../templates/add.hbs":12}],9:[function(require,module,exports){
-	// var Marionette = require('backbone.marionette');
+},{"../../templates/add.hbs":13}],10:[function(require,module,exports){
+var Marionette = require('backbone.marionette');
 
-// var itemView = Marionette.ItemView.extend({
-//     template: require('../../templates/contact_small.hbs'),
-//     initialize: function() {
-//         this.listenTo(this.model, 'change', this.render);
-//     },
-//     events: {
-//         'click': 'showDetails'
-//     },
+module.exports = FindEQView = Marionette.ItemView.extend({
+    template: require('../../templates/findeq.hbs'),
+    events: {
+        'click a.predict-eq-button': 'predicteq'
+    },
 
-//     showDetails: function() {
-//         window.App.core.vent.trigger('app:log', 'Contacts View: showDetails hit.');
-//         window.App.controller.details(this.model.id);
-//     }
-// });
+    predicteq: function(e) {
+        e.preventDefault();
+        var equotient = {
+            eq1: this.$el.find('input[name=eq1]:checked').val(),
+            eq2: this.$el.find('input[name=eq2]:checked').val(),
+            eq3: this.$el.find('input[name=eq3]:checked').val(),
+            eq4: this.$el.find('input[name=eq4]:checked').val(),
+            eq5: this.$el.find('input[name=eq5]:checked').val(),
+            eq6: this.$el.find('input[name=eq6]:checked').val(),
+            eq7: this.$el.find('input[name=eq7]:checked').val()
+        };
 
-// module.exports = CollectionView = Marionette.CollectionView.extend({
-//     initialize: function() {
-//         this.listenTo(this.collection, 'change', this.render);
-//     },
-//     itemView: itemView
-// });
+        window.App.data.predicteq.save(equotient, {
+		    wait : true, 
+		    success : function(resp){
+		    	console.log('success callback');
+		    	console.log(resp);
+		    	//jQuery.parseJSON(xhr.responseText)
+		    	window.App.data.predicteq = resp;
+		    	//window.App.controller.predicttone();
+		    	window.App.controller.add();
+		    },error : function(err) {
+		    	console.log('error callback');
+		    	alert('There was an error. See console for details');
+		    	console.log(err);
+		    }
+		});
+        
+        window.App.core.vent.trigger('app:log', 'Add View: Saved new Preference`!');
+        //	window.App.controller.predicttone();
+    }
+});
 
-},{}],10:[function(require,module,exports){
+},{"../../templates/findeq.hbs":14}],11:[function(require,module,exports){
 var Marionette = require('backbone.marionette');
 
 module.exports = PredictTone = Marionette.ItemView.extend({
@@ -15391,19 +15448,10 @@ module.exports = PredictTone = Marionette.ItemView.extend({
         e.preventDefault();
         window.App.controller.home();
     },
-    deleteContact: function(e) {
-        e.preventDefault();
-        console.log('Deleting contact');
-        window.App.data.contacts.remove(this.model);
-
-        // this will actually send a DELETE to the server:
-        this.model.destroy();
-
-        window.App.controller.home();
-    }
+   
 });
 
-},{"../../templates/predict_tone.hbs":13}],11:[function(require,module,exports){
+},{"../../templates/predict_tone.hbs":15}],12:[function(require,module,exports){
 var Marionette = require('backbone.marionette');
 
 var itemView = Marionette.ItemView.extend({
@@ -15430,7 +15478,7 @@ module.exports = PreferencesView = itemView;
     itemView: itemView
 });
 */  
-},{"../../templates/preference_list.hbs":14}],12:[function(require,module,exports){
+},{"../../templates/preference_list.hbs":16}],13:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -15439,10 +15487,22 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<style>\r\n.mood {display:inline-block;}\r\n.serious{\r\n	background: #ffffff url(\"http://emojipedia.org/wp-content/uploads/2014/04/128x128x1f620-google-android.png.pagespeed.ic.P1zzk2awCb.png\") no-repeat left top;\r\n	width:50px;height:50px;\r\n	background-size: 50px 50px;	\r\n  }\r\n.happy\r\n{\r\n	background: #ffffff url(\"http://emojipedia.org/wp-content/uploads/2014/04/128x128x1f603-google-android.png.pagespeed.ic.9fRw1Zis8-.png\") no-repeat left top;\r\n	width:50px;height:50px;\r\n	background-size: 50px 50px;	\r\n}\r\n\r\n.pensive\r\n{\r\n	background: #ffffff url(\"http://emojipedia.org/wp-content/uploads/2014/04/128x128x1f614-google-android.png.pagespeed.ic.IJ5RjUFy0u.png\") no-repeat left top;\r\n	width:50px;height:50px;\r\n	background-size: 50px 50px;\r\n}\r\n.ok\r\n{\r\n\r\n	background: #ffffff url(\"http://emojipedia.org/wp-content/uploads/2014/04/128x128x1f646-google-android.png.pagespeed.ic.NwV3YRJM0b.png\") no-repeat left top;\r\n	width:50px;height:50px;\r\n	background-size: 50px 50px;\r\n	\r\n}\r\n</style>\r\n<div class=\"add_preference\" style=\"padding-bottom:20px;\">\r\n    <label for=\"role\">Role:</label> \r\n    <input type=\"radio\" id=\"role\" name=\"role\" value=\"c_level\" checked/> C-Level &nbsp;\r\n    <input type=\"radio\" id=\"role\" name=\"role\" value=\"mid_mgmt\"  /> Mid Mgmt &nbsp;\r\n    <input type=\"radio\" id=\"role\" name=\"role\" value=\"sr_mgmt\" /> Sr Mgmt &nbsp;\r\n    <input type=\"radio\" id=\"role\" name=\"role\" value=\"vp\" /> VP &nbsp;\r\n    <br/>	<br/>\r\n    <label for=\"ivy\">Ivy College:</label> <input type=\"checkbox\" id=\"ivy\" name=\"ivy\" /><br/><br/>\r\n    <label for=\"wr_style\">Writing Style:</label> <input type=\"radio\" id=\"wr_style\" name=\"wr_style\" value=\"concise\" checked /> Concise &nbsp;\r\n    <input type=\"radio\" id=\"wr_style\" name=\"wr_style\" value=\"simple\"  /> Simple &nbsp;\r\n    <input type=\"radio\" id=\"wr_style\" name=\"wr_style\" value=\"verbose\" /> Verbose &nbsp;\r\n    <br/><br/>\r\n    <label for=\"industry\">Industry:</label> \r\n    <input type=\"text\" id=\"industry\" />\r\n   	 	\r\n    <br/>\r\n     <label for=\"risklevel\">Risk Level:</label> \r\n     <select name=\"risklevel\" id=\"risklevel\">\r\n     	<option value=\"10\">10</option>\r\n     	<option value=\"9\">9</option>\r\n     	<option value=\"8\">8</option>\r\n     	<option value=\"7\">7</option>\r\n     	<option value=\"6\">6</option>\r\n     	<option value=\"5\">5</option>\r\n     	<option value=\"4\">4</option>\r\n     	<option value=\"3\">3</option>\r\n     	<option value=\"2\">2</option>\r\n     	<option value=\"1\">1</option>\r\n     </select> \r\n    <br/>\r\n    <label for=\"sentto\">Sent to:</label>\r\n	    <input type=\"radio\" id=\"sentto\" name=\"sentto\" value=\"team\" checked/> Team &nbsp;\r\n	    <input type=\"radio\" id=\"sentto\" name=\"sentto\" value=\"peer\" /> Peers &nbsp;\r\n	    <input type=\"radio\" id=\"sentto\" name=\"sentto\" value=\"higher\" /> Higher ups &nbsp;\r\n    <br/><br/>\r\n\r\n    Terms or phrases: <input type=\"text\" id=\"terms1\" name=\"terms\" size=\"25px\" max-length=\"50\" /> <input type=\"text\" id=\"terms2\" name=\"terms\" size=\"25px\" max-length=\"50\" /> <input type=\"text\" id=\"terms3\" name=\"terms\" size=\"25px\" max-length=\"50\" />\r\n    <br/>\r\n    <br/>\r\n    Pick an emoji: <input type=\"radio\" id=\"mood_serious\" name=\"mood\" value=\"serious\" checked /> <div class=\"mood serious\"> &nbsp;</div>\r\n    <input type=\"radio\" id=\"mood_ok\" name=\"mood\" value=\"ok\"  /> <div class=\"mood ok\"> &nbsp;</div>\r\n    <input type=\"radio\" id=\"mood_happy\" name=\"mood\" value=\"happy\" /> <div class=\"mood happy\"> &nbsp;</div>\r\n    <br/>\r\n    <br/>\r\n    <a href=\"/\"><< Back</a> | <a href=\"#\" class=\"save-button\">Predict Tone</a>\r\n\r\n</div>\r\n";
+  return "<style>\r\ndiv {display:block;}\r\n.mood {display:inline-block;}\r\n.serious{\r\n	background: #ffffff url(\"http://emojipedia.org/wp-content/uploads/2014/04/128x128x1f620-google-android.png.pagespeed.ic.P1zzk2awCb.png\") no-repeat left top;\r\n	width:50px;height:50px;\r\n	background-size: 50px 50px;	\r\n  }\r\n.happy\r\n{\r\n	background: #ffffff url(\"http://emojipedia.org/wp-content/uploads/2014/04/128x128x1f603-google-android.png.pagespeed.ic.9fRw1Zis8-.png\") no-repeat left top;\r\n	width:50px;height:50px;\r\n	background-size: 50px 50px;	\r\n}\r\n\r\n.pensive\r\n{\r\n	background: #ffffff url(\"http://emojipedia.org/wp-content/uploads/2014/04/128x128x1f614-google-android.png.pagespeed.ic.IJ5RjUFy0u.png\") no-repeat left top;\r\n	width:50px;height:50px;\r\n	background-size: 50px 50px;\r\n}\r\n.ok\r\n{\r\n\r\n	background: #ffffff url(\"http://emojipedia.org/wp-content/uploads/2014/04/128x128x1f646-google-android.png.pagespeed.ic.NwV3YRJM0b.png\") no-repeat left top;\r\n	width:50px;height:50px;\r\n	background-size: 50px 50px;\r\n	\r\n}\r\n\r\n</style>\r\n<div class=\"add_preference\" style=\"padding-bottom:20px;\">\r\n	<div class=\"personal_info\">\r\n		<h1>Personal Info:</h1>\r\n		<div>\r\n		<label for=\"role\">Derived Emotional Quotient</label> \r\n		<input type=\"text\" id=\"equotient\" name=\"equotient\" value=\"\"  />\r\n		<br/>\r\n		</div>\r\n	    <label for=\"role\">What is your current role:</label> \r\n	    <input type=\"radio\" id=\"role\" name=\"role\" value=\"c_level\" checked/> C-Level &nbsp;\r\n	    <input type=\"radio\" id=\"role\" name=\"role\" value=\"mid_mgmt\"  /> Mid Mgmt &nbsp;\r\n	    <input type=\"radio\" id=\"role\" name=\"role\" value=\"sr_mgmt\" /> Sr Mgmt &nbsp;\r\n	    <input type=\"radio\" id=\"role\" name=\"role\" value=\"vp\" /> VP &nbsp;\r\n	    <br/>	\r\n	    <label for=\"education\">Education:</label> <input type=\"radio\" id=\"education\" name=\"education\" value=\"bachelors\" checked /> Bachelors &nbsp;\r\n	    <input type=\"radio\" id=\"education\" name=\"education\" value=\"masters\"  /> Masters &nbsp;\r\n	    <input type=\"radio\" id=\"education\" name=\"education\" value=\"phd\" /> PhD &nbsp;  <br/><br/>\r\n\r\n	     <label for=\"ivy\">Ivy College:</label> <input type=\"checkbox\" id=\"ivy\" name=\"ivy\" /><br/><br/>\r\n\r\n	    <label for=\"wr_style\">Which communication do you prefer (Writing Style)? :</label> <input type=\"radio\" id=\"wr_style\" name=\"wr_style\" value=\"concise\" checked /> Concise &nbsp;\r\n	    <input type=\"radio\" id=\"wr_style\" name=\"wr_style\" value=\"simple\"  /> Simple &nbsp;\r\n	    <input type=\"radio\" id=\"wr_style\" name=\"wr_style\" value=\"verbose\" /> Verbose &nbsp;\r\n	    <br/>\r\n\r\n\r\n	    <label for=\"industry\">Industry:</label> \r\n	    <input type=\"text\" id=\"industry\"/>\r\n	   	<br/> 	\r\n	   \r\n	    <label for=\"ivy\">Are you an author or have a blog:</label> <input type=\"checkbox\" id=\"author\" name=\"author\" /><br/><br/>\r\n	    <br/>\r\n	    <label for=\"ivy\">When have you tweet or post on LinkedIn?</label> \r\n	    	<input type=\"radio\" id=\"sm_frequency_score\" name=\"sm_frequency_score\" value=\"0\" checked/> Weekly &nbsp;\r\n		    <input type=\"radio\" id=\"sm_frequency_score\" name=\"sm_frequency_score\" value=\"0.25\" /> Monthly &nbsp;\r\n		    <input type=\"radio\" id=\"sm_frequency_score\" name=\"sm_frequency_score\" value=\"0.5\" />In 6 Mos\r\n		    <input type=\"radio\" id=\"sm_frequency_score\" name=\"sm_frequency_score\" value=\"1.0\" />Not in an year\r\n		    <br/><br/>\r\n	    \r\n    </div>\r\n    \r\n\r\n	<br/>  <br/>  <br/>  \r\n	<div class=\"situational_info\"  style=\"border:1px solid #eee;\"> \r\n    	<h2>Situational Info</h2>\r\n    	<div>\r\n		    <label for=\"sentto\">Sent to:</label>\r\n			    <input type=\"radio\" id=\"sentto\" name=\"sentto\" value=\"team\" checked/> Team &nbsp;\r\n			    <input type=\"radio\" id=\"sentto\" name=\"sentto\" value=\"peer\" /> Peers &nbsp;\r\n			    <input type=\"radio\" id=\"sentto\" name=\"sentto\" value=\"higher\" /> Higher ups &nbsp;\r\n		    <br/><br/>\r\n		</div>\r\n		<div>\r\n		    <label for=\"mood\">Pick an emoji:</label> <input type=\"radio\" id=\"mood_serious\" name=\"mood\" value=\"serious\" checked /> <div class=\"mood serious\"> &nbsp;</div>\r\n		    <input type=\"radio\" id=\"mood_ok\" name=\"mood\" value=\"ok\"  /> <div class=\"mood ok\"> &nbsp;</div>\r\n		    <input type=\"radio\" id=\"mood_happy\" name=\"mood\" value=\"happy\" /> <div class=\"mood happy\"> &nbsp;</div>\r\n		    <br/>\r\n		</div>\r\n		<div>\r\n		    <label for=\"mood\">Terms or phrases: </label> <input type=\"text\" id=\"terms1\" name=\"terms\" size=\"25px\" max-length=\"50\" /> <input type=\"text\" id=\"terms2\" name=\"terms\" size=\"25px\" max-length=\"50\" /> <input type=\"text\" id=\"terms3\" name=\"terms\" size=\"25px\" max-length=\"50\" />\r\n		    <br/>\r\n		    <br/>\r\n		</div>\r\n	</div>\r\n	<br/>\r\n    <a href=\"/\"><< Back</a> | <a href=\"#\" class=\"save-button\">Predict Tone</a>\r\n    <br/>\r\n    <script text=\"javascript\">\r\n    	$('#equotient').val(window.App.data.predicteq.attributes[\"equotient\"]);\r\n    </script>\r\n</div>\r\n";
   });
 
-},{"hbsfy/runtime":18}],13:[function(require,module,exports){
+},{"hbsfy/runtime":20}],14:[function(require,module,exports){
+// hbsfy compiled Handlebars template
+var Handlebars = require('hbsfy/runtime');
+module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<style>\r\ndiv {display:block;}\r\n\r\n</style>\r\n\r\n<div class=\"add_preference\" style=\"padding-bottom:20px;\">\r\n	\r\n    <div class=\"emotional_info\">\r\n    	<h1>Emotional Quotient:</h1>\r\n		<table width=\"100%\" border=\"1\" cellspacing=\"0\" cellpadding=\"2\" style=\"background-color:#fff !important;\">\r\n			<tbody>\r\n				<tr>\r\n					<th colspan=\"2\">Questions</td>\r\n					<th width=\"58\" align=\"center\"><font class=\"qte_question_number\">Completely true</font></th>\r\n					<th width=\"58\" align=\"center\"><font class=\"qte_question_number\">Mostly<br>true</font></th>\r\n					<th width=\"58\" align=\"center\"><font class=\"qte_question_number\">Somewhat true/false</font></th>\r\n					<th width=\"58\" align=\"center\"><font class=\"qte_question_number\">Mostly<br>false</font></th>\r\n					<th width=\"58\" align=\"center\"><font class=\"qte_question_number\">Completely false</font></th>\r\n				</tr>\r\n				<tr class=\"qte_answer_2\">\r\n					<td class=\"qte_question_number\" nowrap=\"\" valign=\"top\" width=\"1\">1.&nbsp;</td>\r\n					<td valign=\"top\">I adjust my behavior depending on who I am interacting with (e.g. calm and friendly with a peer, commanding with my team, serious and professional with my boss, etc.).</td>\r\n					\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq1\" value=\"1\"></td>\r\n					\r\n					\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq1\" value=\"2\"></td>\r\n					\r\n					\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq1\" value=\"3\"></td>\r\n					\r\n					\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq1\" value=\"4\"></td>\r\n					\r\n					\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq1\" value=\"5\"></td>\r\n					\r\n					\r\n					\r\n				</tr>\r\n				\r\n				<tr class=\"qte_answer_1\">\r\n					<td class=\"qte_question_number\" nowrap=\"\" valign=\"top\" width=\"1\">2.&nbsp;</td>\r\n					<td valign=\"top\">I tend to postpone or avoid discussing touchy topics.</td>\r\n					\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq2\" value=\"1\"></td>\r\n					\r\n					\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq2\" value=\"2\"></td>\r\n					\r\n					\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq2\" value=\"3\"></td>\r\n					\r\n					\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq2\" value=\"4\"></td>\r\n					\r\n					\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq2\" value=\"5\"></td>\r\n					\r\n					\r\n					\r\n				</tr>\r\n\r\n				<tr class=\"qte_answer_2\">\r\n					<td class=\"qte_question_number\" nowrap=\"\" valign=\"top\" width=\"1\">3.&nbsp;</td>\r\n					<td valign=\"top\">I find myself feeling nervous about situations or events, and I don't even know why.</td>\r\n					\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq3\" value=\"1\"></td>\r\n					\r\n					\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq3\" value=\"2\"></td>\r\n					\r\n					\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq3\" value=\"3\"></td>\r\n					\r\n					\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq3\" value=\"4\"></td>\r\n					\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq3\" value=\"5\"></td>\r\n					\r\n					\r\n				</tr>\r\n				\r\n				\r\n				<tr class=\"qte_answer_1\">\r\n					<td class=\"qte_question_number\" nowrap=\"\" valign=\"top\" width=\"1\">4.&nbsp;</td>\r\n					<td valign=\"top\">If asked to list my top three strengths, I would have hard time coming up with them.</td>\r\n					\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq4\" value=\"1\"></td>\r\n					\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq4\" value=\"2\"></td>\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq4\" value=\"3\"></td>\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq4\" value=\"4\"></td>\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq4\" value=\"5\"></td>\r\n					\r\n				</tr>\r\n								\r\n				<tr class=\"qte_answer_2\">\r\n					<td class=\"qte_question_number\" nowrap=\"\" valign=\"top\" width=\"1\">5.&nbsp;</td>\r\n					<td valign=\"top\">When I see grammatical mistakes in an email, I feel compelled to let the person know, and ensure it is fixed.</td>\r\n					\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq5\" value=\"1\"></td>\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq5\" value=\"2\"></td>\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq5\" value=\"3\"></td>\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq5\" value=\"4\"></td>\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq5\" value=\"5\"></td>\r\n					\r\n				</tr>\r\n				\r\n				\r\n				<tr class=\"qte_answer_1\">\r\n					<td class=\"qte_question_number\" nowrap=\"\" valign=\"top\" width=\"1\">6.&nbsp;</td>\r\n					<td valign=\"top\">Once a pessimistic thought pops into my head, it's like a floodgate opens - my thoughts get more and more negative.</td>\r\n					\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq6\" value=\"1\"></td>\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq6\" value=\"2\"></td>\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq6\" value=\"3\"></td>\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq6\" value=\"4\"></td>\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq6\" value=\"5\"></td>\r\n				</tr>\r\n	\r\n				<tr class=\"qte_answer_2\">\r\n					<td class=\"qte_question_number\" nowrap=\"\" valign=\"top\" width=\"1\">7.&nbsp;</td>\r\n					<td valign=\"top\">I like learning new things. </td>\r\n					\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq7\" value=\"1\"></td>\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq7\" value=\"2\"></td>\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq7\" value=\"3\"></td>\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq7\" value=\"4\"></td>\r\n					<td align=\"center\"><input type=\"radio\" name=\"eq7\" value=\"5\"></td>\r\n				</tr>\r\n				\r\n			</tbody>\r\n		</table>	\r\n	</div>\r\n\r\n	<br/>\r\n    <a href=\"/\"><< Back</a> | <a href=\"#\" class=\"predict-eq-button\">Predict EQ</a>\r\n    <br/>\r\n\r\n</div>\r\n";
+  });
+
+},{"hbsfy/runtime":20}],15:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -15487,7 +15547,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-},{"hbsfy/runtime":18}],14:[function(require,module,exports){
+},{"hbsfy/runtime":20}],16:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -15530,14 +15590,14 @@ function program1(depth0,data) {
   return buffer;
   }
 
-  buffer += "<script type=\"text/Javascript\">\r\n	$(document).ready(function() \r\n	    { \r\n	        $(\"#myTable\").tablesorter( {sortList: [[6,0]]} ); \r\n	    } \r\n	); \r\n	    	    \r\n</script>\r\n<div style=\"clear:right;padding-bottom:5px;\">\r\n	<h1>Training Data</h1>\r\n	Test Data for Intuitive Crafters. <a href=\"#add\">Predict the Tone</a>\r\n</div>\r\n<table id=\"myTable\" class=\"tablesorter\">\r\n	<thead>\r\n	<tr>\r\n		<th class=\"header\">Role</th><th class=\"header\">Ivy</th><th class=\"header\">Writing Style</th><th class=\"header\">Industry</th><th class=\"header\">Risk Level</th><th class=\"header\">Sent to</th><th class=\"header\">Tone</th>\r\n	</tr>\r\n	</thead>\r\n	<tbody>\r\n	";
+  buffer += "<script type=\"text/Javascript\">\r\n	$(document).ready(function() \r\n	    { \r\n	        $(\"#myTable\").tablesorter( {sortList: [[6,0]]} ); \r\n	    } \r\n	); \r\n	    	    \r\n</script>\r\n<div style=\"clear:right;padding-bottom:5px;\">\r\n	<h1>Training Data</h1>\r\n	Test Data for Intuitive Crafters. <a href=\"#findeq\">Start</a>\r\n</div>\r\n<table id=\"myTable\" class=\"tablesorter\">\r\n	<thead>\r\n	<tr>\r\n		<th class=\"header\">Role</th><th class=\"header\">Ivy</th><th class=\"header\">Writing Style</th><th class=\"header\">Industry</th><th class=\"header\">Risk Level</th><th class=\"header\">Sent to</th><th class=\"header\">Tone</th>\r\n	</tr>\r\n	</thead>\r\n	<tbody>\r\n	";
   stack1 = helpers.each.call(depth0, depth0, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n	</tbody>\r\n</table>\r\n\r\n";
   return buffer;
   });
 
-},{"hbsfy/runtime":18}],15:[function(require,module,exports){
+},{"hbsfy/runtime":20}],17:[function(require,module,exports){
 /*jshint eqnull: true */
 
 module.exports.create = function() {
@@ -15705,7 +15765,7 @@ Handlebars.registerHelper('log', function(context, options) {
 return Handlebars;
 };
 
-},{}],16:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 exports.attach = function(Handlebars) {
 
 // BEGIN(BROWSER)
@@ -15813,7 +15873,7 @@ return Handlebars;
 
 };
 
-},{}],17:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 exports.attach = function(Handlebars) {
 
 var toString = Object.prototype.toString;
@@ -15898,7 +15958,7 @@ Handlebars.Utils = {
 return Handlebars;
 };
 
-},{}],18:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 var hbsBase = require("handlebars/lib/handlebars/base");
 var hbsUtils = require("handlebars/lib/handlebars/utils");
 var hbsRuntime = require("handlebars/lib/handlebars/runtime");
@@ -15909,5 +15969,5 @@ hbsRuntime.attach(Handlebars);
 
 module.exports = Handlebars;
 
-},{"handlebars/lib/handlebars/base":15,"handlebars/lib/handlebars/runtime":16,"handlebars/lib/handlebars/utils":17}]},{},[4])
+},{"handlebars/lib/handlebars/base":17,"handlebars/lib/handlebars/runtime":18,"handlebars/lib/handlebars/utils":19}]},{},[4])
 ;

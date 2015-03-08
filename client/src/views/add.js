@@ -16,7 +16,12 @@ module.exports = AddView = Marionette.ItemView.extend({
             risklevel: this.$el.find('[id=risklevel]').find(':selected').val(),
             sentto: this.$el.find('input[name=sentto]:checked').val(),
             mood: this.$el.find('input[name=mood]:checked').val(),
-            terms: this.$el.find('#terms1').val()+"|"+ this.$el.find('#terms3').val()+"|"+ this.$el.find('#terms3').val()
+            terms: this.$el.find('#terms1').val()+"|"+ this.$el.find('#terms3').val()+"|"+ this.$el.find('#terms3').val(),
+            author: (this.$el.find('input[name=author]:checked').length>0)?"true":"false",
+            sm_frequency_score: this.$el.find('input[name=sm_frequency_score]:checked').val(),
+            education: this.$el.find('input[name=education]:checked').val(),
+            equotient: this.$el.find('#equotient').val()
+
         };
 
         window.App.data.preferences.create(newPreference, {

@@ -1,4 +1,5 @@
 <style>
+div {display:block;}
 .mood {display:inline-block;}
 .serious{
 	background: #ffffff url("http://emojipedia.org/wp-content/uploads/2014/04/128x128x1f620-google-android.png.pagespeed.ic.P1zzk2awCb.png") no-repeat left top;
@@ -26,51 +27,76 @@
 	background-size: 50px 50px;
 	
 }
+
 </style>
 <div class="add_preference" style="padding-bottom:20px;">
-    <label for="role">Role:</label> 
-    <input type="radio" id="role" name="role" value="c_level" checked/> C-Level &nbsp;
-    <input type="radio" id="role" name="role" value="mid_mgmt"  /> Mid Mgmt &nbsp;
-    <input type="radio" id="role" name="role" value="sr_mgmt" /> Sr Mgmt &nbsp;
-    <input type="radio" id="role" name="role" value="vp" /> VP &nbsp;
-    <br/>	<br/>
-    <label for="ivy">Ivy College:</label> <input type="checkbox" id="ivy" name="ivy" /><br/><br/>
-    <label for="wr_style">Writing Style:</label> <input type="radio" id="wr_style" name="wr_style" value="concise" checked /> Concise &nbsp;
-    <input type="radio" id="wr_style" name="wr_style" value="simple"  /> Simple &nbsp;
-    <input type="radio" id="wr_style" name="wr_style" value="verbose" /> Verbose &nbsp;
-    <br/><br/>
-    <label for="industry">Industry:</label> 
-    <input type="text" id="industry" />
-   	 	
-    <br/>
-     <label for="risklevel">Risk Level:</label> 
-     <select name="risklevel" id="risklevel">
-     	<option value="10">10</option>
-     	<option value="9">9</option>
-     	<option value="8">8</option>
-     	<option value="7">7</option>
-     	<option value="6">6</option>
-     	<option value="5">5</option>
-     	<option value="4">4</option>
-     	<option value="3">3</option>
-     	<option value="2">2</option>
-     	<option value="1">1</option>
-     </select> 
-    <br/>
-    <label for="sentto">Sent to:</label>
-	    <input type="radio" id="sentto" name="sentto" value="team" checked/> Team &nbsp;
-	    <input type="radio" id="sentto" name="sentto" value="peer" /> Peers &nbsp;
-	    <input type="radio" id="sentto" name="sentto" value="higher" /> Higher ups &nbsp;
-    <br/><br/>
+	<div class="personal_info">
+		<h1>Personal Info:</h1>
+		<div>
+		<label for="role">Derived Emotional Quotient</label> 
+		<input type="text" id="equotient" name="equotient" value=""  />
+		<br/>
+		</div>
+	    <label for="role">What is your current role:</label> 
+	    <input type="radio" id="role" name="role" value="c_level" checked/> C-Level &nbsp;
+	    <input type="radio" id="role" name="role" value="mid_mgmt"  /> Mid Mgmt &nbsp;
+	    <input type="radio" id="role" name="role" value="sr_mgmt" /> Sr Mgmt &nbsp;
+	    <input type="radio" id="role" name="role" value="vp" /> VP &nbsp;
+	    <br/>	
+	    <label for="education">Education:</label> <input type="radio" id="education" name="education" value="bachelors" checked /> Bachelors &nbsp;
+	    <input type="radio" id="education" name="education" value="masters"  /> Masters &nbsp;
+	    <input type="radio" id="education" name="education" value="phd" /> PhD &nbsp;  <br/><br/>
 
-    Terms or phrases: <input type="text" id="terms1" name="terms" size="25px" max-length="50" /> <input type="text" id="terms2" name="terms" size="25px" max-length="50" /> <input type="text" id="terms3" name="terms" size="25px" max-length="50" />
-    <br/>
-    <br/>
-    Pick an emoji: <input type="radio" id="mood_serious" name="mood" value="serious" checked /> <div class="mood serious"> &nbsp;</div>
-    <input type="radio" id="mood_ok" name="mood" value="ok"  /> <div class="mood ok"> &nbsp;</div>
-    <input type="radio" id="mood_happy" name="mood" value="happy" /> <div class="mood happy"> &nbsp;</div>
-    <br/>
-    <br/>
+	     <label for="ivy">Ivy College:</label> <input type="checkbox" id="ivy" name="ivy" /><br/><br/>
+
+	    <label for="wr_style">Which communication do you prefer (Writing Style)? :</label> <input type="radio" id="wr_style" name="wr_style" value="concise" checked /> Concise &nbsp;
+	    <input type="radio" id="wr_style" name="wr_style" value="simple"  /> Simple &nbsp;
+	    <input type="radio" id="wr_style" name="wr_style" value="verbose" /> Verbose &nbsp;
+	    <br/>
+
+
+	    <label for="industry">Industry:</label> 
+	    <input type="text" id="industry"/>
+	   	<br/> 	
+	   
+	    <label for="ivy">Are you an author or have a blog:</label> <input type="checkbox" id="author" name="author" /><br/><br/>
+	    <br/>
+	    <label for="ivy">When have you tweet or post on LinkedIn?</label> 
+	    	<input type="radio" id="sm_frequency_score" name="sm_frequency_score" value="0" checked/> Weekly &nbsp;
+		    <input type="radio" id="sm_frequency_score" name="sm_frequency_score" value="0.25" /> Monthly &nbsp;
+		    <input type="radio" id="sm_frequency_score" name="sm_frequency_score" value="0.5" />In 6 Mos
+		    <input type="radio" id="sm_frequency_score" name="sm_frequency_score" value="1.0" />Not in an year
+		    <br/><br/>
+	    
+    </div>
+    
+
+	<br/>  <br/>  <br/>  
+	<div class="situational_info"  style="border:1px solid #eee;"> 
+    	<h2>Situational Info</h2>
+    	<div>
+		    <label for="sentto">Sent to:</label>
+			    <input type="radio" id="sentto" name="sentto" value="team" checked/> Team &nbsp;
+			    <input type="radio" id="sentto" name="sentto" value="peer" /> Peers &nbsp;
+			    <input type="radio" id="sentto" name="sentto" value="higher" /> Higher ups &nbsp;
+		    <br/><br/>
+		</div>
+		<div>
+		    <label for="mood">Pick an emoji:</label> <input type="radio" id="mood_serious" name="mood" value="serious" checked /> <div class="mood serious"> &nbsp;</div>
+		    <input type="radio" id="mood_ok" name="mood" value="ok"  /> <div class="mood ok"> &nbsp;</div>
+		    <input type="radio" id="mood_happy" name="mood" value="happy" /> <div class="mood happy"> &nbsp;</div>
+		    <br/>
+		</div>
+		<div>
+		    <label for="mood">Terms or phrases: </label> <input type="text" id="terms1" name="terms" size="25px" max-length="50" /> <input type="text" id="terms2" name="terms" size="25px" max-length="50" /> <input type="text" id="terms3" name="terms" size="25px" max-length="50" />
+		    <br/>
+		    <br/>
+		</div>
+	</div>
+	<br/>
     <a href="/"><< Back</a> | <a href="#" class="save-button">Predict Tone</a>
-
+    <br/>
+    <script text="javascript">
+    	$('#equotient').val(window.App.data.predicteq.attributes["equotient"]);
+    </script>
 </div>
