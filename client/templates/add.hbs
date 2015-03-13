@@ -36,13 +36,14 @@ div {display:block;}
 		<label for="role">Derived Emotional Quotient</label> 
 		<input type="text" id="equotient" name="equotient" value=""  />
 		<br/>
+		<br/>
 		</div>
 	    <label for="role">What is your current role:</label> 
 	    <input type="radio" id="role" name="role" value="c_level" checked/> C-Level &nbsp;
 	    <input type="radio" id="role" name="role" value="mid_mgmt"  /> Mid Mgmt &nbsp;
 	    <input type="radio" id="role" name="role" value="sr_mgmt" /> Sr Mgmt &nbsp;
 	    <input type="radio" id="role" name="role" value="vp" /> VP &nbsp;
-	    <br/>	
+	    <br/><br/>	
 	    <label for="education">Education:</label> <input type="radio" id="education" name="education" value="bachelors" checked /> Bachelors &nbsp;
 	    <input type="radio" id="education" name="education" value="masters"  /> Masters &nbsp;
 	    <input type="radio" id="education" name="education" value="phd" /> PhD &nbsp;  <br/><br/>
@@ -52,24 +53,41 @@ div {display:block;}
 	    <label for="wr_style">Which communication do you prefer (Writing Style)? :</label> <input type="radio" id="wr_style" name="wr_style" value="concise" checked /> Concise &nbsp;
 	    <input type="radio" id="wr_style" name="wr_style" value="simple"  /> Simple &nbsp;
 	    <input type="radio" id="wr_style" name="wr_style" value="verbose" /> Verbose &nbsp;
-	    <br/>
+	    <br/><br/>
 
 
 	    <label for="industry">Industry:</label> 
 	    <input type="text" id="industry"/>
-	   	<br/> 	
+	   	<br/> 	<br/>
 	   
 	    <label for="ivy">Are you an author or have a blog:</label> <input type="checkbox" id="author" name="author" /><br/><br/>
 	    <br/>
-	    <label for="ivy">When have you tweet or post on LinkedIn?</label> 
-	    	<input type="radio" id="sm_frequency_score" name="sm_frequency_score" value="0" checked/> Weekly &nbsp;
-		    <input type="radio" id="sm_frequency_score" name="sm_frequency_score" value="0.25" /> Monthly &nbsp;
-		    <input type="radio" id="sm_frequency_score" name="sm_frequency_score" value="0.5" />In 6 Mos
-		    <input type="radio" id="sm_frequency_score" name="sm_frequency_score" value="1.0" />Not in an year
+	    <label for="ivy">How often do you tweet or post on LinkedIn?</label> 
+	    	<input type="radio" id="sm_frequency_score" name="sm_frequency_score" value="1" checked/> Weekly &nbsp;
+		    <input type="radio" id="sm_frequency_score" name="sm_frequency_score" value="0.75" /> Monthly &nbsp;
+		    <input type="radio" id="sm_frequency_score" name="sm_frequency_score" value="0.25" />Once in 6 Mos
+		    <input type="radio" id="sm_frequency_score" name="sm_frequency_score" value="0" />Not in an year
 		    <br/><br/>
-	    
+	    <label for="risklevel">Are you a risk taker?</label> 
+	    	<select name="risklevel" id="risklevel">
+	    		<option value="10">Yes, its important</option>
+	    		<option value="8">Sometimes, carefully</option>
+	    		<option value="6">Rarely, believe in stability</option>
+	    	</select>
+	    	<!--
+	    	Short Answers
+ 
+ "I consider myself to be in the middle, but if I were to choose from my past experience, I would think I would call myself a careful risk taker."
+ 
+ "I'm reliable and believe in stability and guarantees.  My work will be based on facts without assumptions or guesses, so I tend to stay away from risks."
+ 
+ "I think it's important to take some risks.  I keep the options open and if the reward justifies the risks, I would definitely try.  So I'm more of a risk taker."
+ 
+ "I take risks because through planning and working smart, it's possible to reduce some of the risk.  So if there's a reasonable chance of success, I would take the opportunity."
+	    	-->
+		    <br/><br/>
     </div>
-    
+  
 
 	<br/>  <br/>  <br/>  
 	<div class="situational_info"  style="border:1px solid #eee;"> 

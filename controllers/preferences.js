@@ -30,11 +30,10 @@ getData_DB =  function (){
 };
 
 getData =  function (){
-
-        
-        fs.readFile('app/data.js', 'utf8', function (err, data) {
-          if (err) throw err;
-          training_data = test_data = JSON.parse(data);
-        });
+   
+    fs.readFile('app/data.js', 'utf8', function (err, data) {
+      if (err) throw err;
+      training_data = test_data = JSON.parse(data);
+    });
         
 };

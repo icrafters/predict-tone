@@ -10,7 +10,10 @@ var Preference  =  new Schema ({
         industry:{type:  String},
         risklevel:{type:  String},
         sentto:{type:  String},
-        tone:{type:  String}
+        tone:{type:  String},
+        education: {type: String},
+        author: {type: String},
+        sm_frequency_score: {type: String}
 });
 
 var Predicteq  =  new Schema ({
@@ -32,7 +35,10 @@ var Predicttone = new Schema({
         risklevel:{type:  String},
         sentto:{type:  String},
         tone:{type:  String},
-        tone_string:{type: String}
+        tone_string:{type: String},
+        education: {type: String},
+        author: {type: String},
+        sm_frequency_score: {type: String}
 });
 
 

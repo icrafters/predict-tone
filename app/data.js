@@ -8,7 +8,11 @@
     "role": "c_level",
     "sentto": "team",
     "tone": "3",
-    "wr_style": "concise"
+    "wr_style": "concise",
+    "education": "masters",
+    "author": "false",
+    "sm_frequency_score":"0"
+
   },
   {
     "__v": 0,
@@ -19,7 +23,10 @@
     "role": "c_level",
     "sentto": "team",
     "tone": "3",
-    "wr_style": "concise"
+    "wr_style": "concise",
+    "education": "masters",
+    "author": "false",
+    "sm_frequency_score":"0"
   },
   {
     "__v": 0,
@@ -30,7 +37,10 @@
     "role": "c_level",
     "sentto": "team",
     "tone": "3",
-    "wr_style": "concise"
+    "wr_style": "concise",
+    "education": "masters",
+    "author": "true",
+    "sm_frequency_score":"0.25"
   },
   {
     "_id": "549d98d05c1dc8f801000000",
@@ -40,14 +50,23 @@
     "industry": "finance",
     "risklevel": "10",
     "sentto": "team",
-    "tone": "3"
+    "tone": "3",
+    "education": "bachelors",
+    "author": "true",
+    "sm_frequency_score":"0.25"
   },
   {
     "_id": "549dc67cff4c90b96ab0ff4c",
-    "ivy": "false",
+    "role": "sr-mgmt",
+    "ivy": "true",
+    "wr_style": "concise",
+    "industry": "finance",
     "risklevel": "10",
-    "role": "c_level",
-    "tone": "3"
+    "sentto": "team",
+    "tone": "3",
+    "education": "masters",
+    "author": "true",
+    "sm_frequency_score":"0.25"
   },
   {
     "tone": "3",
@@ -58,7 +77,10 @@
     "ivy": "false",
     "role": "vp",
     "_id": "54a2e721e3e9da7814301ec9",
-    "__v": 0
+    "__v": 0,
+    "education": "masters",
+    "author": "true",
+    "sm_frequency_score":"0.25"
   },
   {
     "_id": "54695fbb5c1dc8f004000001",
@@ -68,7 +90,12 @@
     "industry": "finance",
     "wr_style": "simple",
     "ivy": "true",
-    "role": "mid_mgmt"
+    "role": "mid_mgmt",
+    "education": "masters",
+    "author": "false",
+    "sm_frequency_score":"0.25"
+
+
   },
   {
     "role": "mid_mgmt",
@@ -79,7 +106,10 @@
     "sentto": "peer",
     "tone": "3",
     "_id": "54695f283d69cc501f7bdd8d",
-    "__v": 0
+    "__v": 0,
+    "education": "bachelors",
+    "author": "false",
+    "sm_frequency_score":"1"
   },
   {
     "role": "c_level",
@@ -90,7 +120,10 @@
     "sentto": "team",
     "tone": "3",
     "_id": "54695f283d69cc501f7bdd7b",
-    "__v": 0
+    "__v": 0,
+    "education": "phd",
+    "author": "true",
+    "sm_frequency_score":"0.25"
   },
   {
     "tone": "3",
@@ -101,7 +134,10 @@
     "ivy": "true",
     "role": "c_level",
     "_id": "54711648da073db403ce9286",
-    "__v": 0
+    "__v": 0,
+    "education": "masters",
+    "author": "true",
+    "sm_frequency_score":"0.75"
   },
   {
     "tone": "3",
@@ -112,7 +148,10 @@
     "ivy": "true",
     "role": "c_level",
     "_id": "54711779da073db403ce9287",
-    "__v": 0
+    "__v": 0,
+    "education": "masters",
+    "author": "false",
+    "sm_frequency_score":"1"
   },
   {
     "tone": "3",
@@ -123,7 +162,10 @@
     "ivy": "false",
     "role": "vp",
     "_id": "5478ee8287334f041b7d2089",
-    "__v": 0
+    "__v": 0,
+    "education": "masters",
+    "author": "false",
+    "sm_frequency_score":"0.25"
   },
   {
     "tone": "3",
@@ -167,7 +209,10 @@
     "sentto": "team",
     "tone": "3",
     "_id": "54695f283d69cc501f7bdd7d",
-    "__v": 0
+    "__v": 0,
+    "education": "phd",
+    "author": "true",
+    "sm_frequency_score":"1"
   },
   {
     "role": "sr-mgmt",
@@ -178,7 +223,10 @@
     "sentto": "team",
     "tone": "3",
     "_id": "54695f283d69cc501f7bdd7f",
-    "__v": 0
+    "__v": 0,
+    "education": "bachelors",
+    "author": "true",
+    "sm_frequency_score":"0.5"
   },
   {
     "role": "mid_mgmt",
@@ -200,7 +248,10 @@
     "sentto": "team",
     "tone": "3",
     "_id": "54695f283d69cc501f7bdd82",
-    "__v": 0
+    "__v": 0,
+    "education": "phd",
+    "author": "false",
+    "sm_frequency_score":"0.75"
   },
   {
     "role": "sr-mgmt",
@@ -222,7 +273,10 @@
     "sentto": "team",
     "tone": "3",
     "_id": "54695f283d69cc501f7bdd8c",
-    "__v": 0
+    "__v": 0,
+    "education": "bachelors",
+    "author": "false",
+    "sm_frequency_score":"0.75"
   },
   {
     "tone": "3",
@@ -299,7 +353,10 @@
     "ivy": "false",
     "role": "mid_mgmt",
     "_id": "5478d728fa9a4df023250df0",
-    "__v": 0
+    "__v": 0,
+    "education": "bachelors",
+    "author": "false",
+    "sm_frequency_score":"0.75"
   },
   {
     "tone": "3",
@@ -310,7 +367,10 @@
     "ivy": "true",
     "role": "mid_mgmt",
     "_id": "5478d788fa9a4df023250df1",
-    "__v": 0
+    "__v": 0,
+    "education": "masters",
+    "author": "true",
+    "sm_frequency_score":"1"
   },
   {
     "tone": "3",
@@ -585,7 +645,10 @@
     "ivy": "false",
     "role": "vp",
     "_id": "5490e4513603a490243ca84a",
-    "__v": 0
+    "__v": 0,
+    "education": "masters",
+    "author": "true",
+    "sm_frequency_score":"1"
   },
   {
     "tone": "3",
@@ -596,7 +659,10 @@
     "ivy": "true",
     "role": "c_level",
     "_id": "54a85a7edc5f319c22e9bd32",
-    "__v": 0
+    "__v": 0,
+    "education": "masters",
+    "author": "false",
+    "sm_frequency_score":"0.25"
   },
   {
     "tone": "3",
@@ -607,7 +673,10 @@
     "ivy": "false",
     "role": "vp",
     "_id": "54bb05b6df1b6c901c83fac5",
-    "__v": 0
+    "__v": 0,
+    "education": "bachelors",
+    "author": "false",
+    "sm_frequency_score":"0.25"
   },
   {
     "_id": "549d99625c1dc8f801000003",
@@ -792,7 +861,10 @@
     "sentto": "team",
     "tone": "2",
     "_id": "54695f283d69cc501f7bdd88",
-    "__v": 0
+    "__v": 0,
+    "education": "bachelors",
+    "author": "false",
+    "sm_frequency_score":"0.25"
   },
   {
     "role": "c_level",
@@ -825,7 +897,10 @@
     "ivy": "true",
     "role": "vp",
     "_id": "546eaef1a314e6b45afe7870",
-    "__v": 0
+    "__v": 0,
+    "education": "masters",
+    "author": "false",
+    "sm_frequency_score":"0.25"
   },
   {
     "tone": "2",
@@ -858,7 +933,10 @@
     "ivy": "false",
     "role": "mid_mgmt",
     "_id": "5478d6a71c8755202b6700cc",
-    "__v": 0
+    "__v": 0,
+    "education": "masters",
+    "author": "false",
+    "sm_frequency_score":"0.25"
   },
   {
     "tone": "2",
@@ -1190,11 +1268,14 @@
     "sentto": "team",
     "risklevel": "4",
     "industry": "internet",
-    "wr_style": "concise",
+    "wr_style": "verbose",
     "ivy": "false",
     "role": "c_level",
     "_id": "54a20f7f8241e5582203b6b0",
-    "__v": 0
+    "__v": 0,
+    "education": "bachelors",
+    "author": "true",
+    "sm_frequency_score":"1"
   },
   {
     "role": "mid_mgmt",

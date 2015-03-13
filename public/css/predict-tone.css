@@ -277,3 +277,6 @@ td {
 #footer ul {
   list-style: none;
 }
+#js-boilerplate-app {
+  margin: 0 40px;
+}
